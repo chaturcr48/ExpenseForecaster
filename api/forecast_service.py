@@ -3,6 +3,7 @@ import pandas as pd
 from fastapi import FastAPI, Query
 from pathlib import Path
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from retrain_forecast import retrain_and_save
 
 app = FastAPI(title="Expense Forecaster Agent")
