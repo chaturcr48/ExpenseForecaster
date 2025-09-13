@@ -7,6 +7,21 @@ from retrain_forecast import retrain_and_save
 
 app = FastAPI(title="Expense Forecaster Agent")
 
+# Enable CORS
+origins = [
+    "http://localhost:5173",   # for local dev (Vite frontend)
+    "https://yourfrontenddomain.com",  # replace with actual frontend if deployed
+    "*"  # 👈 you can temporarily allow all for testing
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # or ["*"] for all
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Load forecast data prepared in Step 3
 data_path = Path("artifacts/category_forecasts_next12.csv")
 df_forecasts = pd.read_csv(data_path, parse_dates=["month"])
